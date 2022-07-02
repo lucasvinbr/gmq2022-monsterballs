@@ -20,8 +20,8 @@ end
 ---@param dataPassed table
 Ui.Show = function (instanceRoot, dataPassed)
     instanceRoot:SetVisible(true)
-    DualityPlayerScript.timeBar = timeBar
-    DualityPlayerScript.canCountTime = true
+    PlayerScript.timeBar = timeBar
+    PlayerScript.canCountTime = true
 end
 
 return Ui

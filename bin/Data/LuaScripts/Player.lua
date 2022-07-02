@@ -1,17 +1,17 @@
 local uiManager = require "LuaScripts/ui/UI_Manager"
----@class DualityPlayer : LuaScriptObject
+---@class Player : LuaScriptObject
 
 
 -- Character2D script object class
----@type DualityPlayer
-DualityPlayer = ScriptObject()
+---@type Player
+Player = ScriptObject()
 
 local bigHeadAnimTime = 0.75
 
 ---@type Vector2
 local bigHeadBigScaleFactor = 300
 
-function DualityPlayer:Start()
+function Player:Start()
 
     self.isFlipped = false
     self.canCountTime = false
@@ -85,10 +85,10 @@ function DualityPlayer:Start()
 
     self:SubscribeToEvent(self.node, "NodeBeginContact2D", "DualityPlayer:HandleCollisionStart")
 
-    DualityPlayerNode:SetScale(0.2)
+    PlayerNode:SetScale(0.2)
 end
 
-function DualityPlayer:Update(timeStep)
+function Player:Update(timeStep)
 
     -- round start/end transition anim
     if CurGameState ~= GAMESTATE_PLAYING then
@@ -180,7 +180,7 @@ function DualityPlayer:Update(timeStep)
 end
 
 
-function DualityPlayer:Flip(isFlipped)
+function Player:Flip(isFlipped)
     self.isFlipped = isFlipped
 
     self.flipImmunityTime = PLAYER_FLIP_IMMUNE_INTERVAL
@@ -192,7 +192,7 @@ function DualityPlayer:Flip(isFlipped)
     end
 end
 
-function DualityPlayer:HandleCollisionStart(eventType, eventData)
+function Player:HandleCollisionStart(eventType, eventData)
 
     if CurGameState ~= GAMESTATE_PLAYING then return end
 
@@ -230,7 +230,7 @@ function DualityPlayer:HandleCollisionStart(eventType, eventData)
 end
 
 --- sets up the animation responsible for transitioning rounds' start and end
-function DualityPlayer:SetupBigHeadAnim()
+function Player:SetupBigHeadAnim()
     self.bigHeadAnimTimePassed = 0.0
 
     self.introHeadNode:SetEnabled(true)

@@ -1,13 +1,13 @@
-local DualityGlobalEvents = require "LuaScripts/duality_GlobalEvents"
+local GlobalEvents = require "LuaScripts/GlobalEvents"
 
 --    - Handle Esc key down to hide Console or exit application
 
 
-local DualityDebug = {}
+local GameDebug = {}
 
-DualityDebug.drawDebug = false -- Draw debug geometry flag
+GameDebug.drawDebug = false -- Draw debug geometry flag
 
-local function DualityDebugHandleKeyUp(eventType, eventData)
+local function GameDebugHandleKeyUp(eventType, eventData)
     local key = eventData["Key"]:GetInt()
     -- Close console (if open) or exit when ESC is pressed
     if key == KEY_ESCAPE then
@@ -21,7 +21,7 @@ local function DualityDebugHandleKeyUp(eventType, eventData)
     end
 end
 
-local function DualityDebugHandleKeyDown(eventType, eventData)
+local function GameDebugHandleKeyDown(eventType, eventData)
     local key = eventData["Key"]:GetInt()
 
     local uiManager = require("LuaScripts/ui/UI_Manager")
@@ -38,28 +38,28 @@ local function DualityDebugHandleKeyDown(eventType, eventData)
 
         -- uiManager.ShowUI("Endgame", endgameData)
     elseif key == KEY_F3 then
-        DualityDebug.drawDebug = not DualityDebug.drawDebug
+        GameDebug.drawDebug = not GameDebug.drawDebug
         -- uiManager.ShowUI("MainMenu")
     elseif key == KEY_F5 then
-        Scene_:SaveXML(fileSystem:GetProgramDir().."Data/Scenes/duality.xml")
-        ui.root:SaveXML(fileSystem:GetProgramDir().."Data/duality.xml")
+        Scene_:SaveXML(fileSystem:GetProgramDir().."Data/Scenes/debugSave.xml")
+        ui.root:SaveXML(fileSystem:GetProgramDir().."Data/debugSaveUI.xml")
     end
 
 end
 
-function DualityDebug.DebugSetup()
+function GameDebug.DebugSetup()
 
     -- Create console and debug HUD
-    DualityDebug.CreateConsoleAndDebugHud()
+    GameDebug.CreateConsoleAndDebugHud()
 
     -- Subscribe key down event
-    DualityGlobalEvents:SubscribeToEvent("KeyDown", DualityDebugHandleKeyDown)
+    GlobalEvents:SubscribeToEvent("KeyDown", GameDebugHandleKeyDown)
 
     -- Subscribe key up event
-    DualityGlobalEvents:SubscribeToEvent("KeyUp", DualityDebugHandleKeyUp)
+    GlobalEvents:SubscribeToEvent("KeyUp", GameDebugHandleKeyUp)
 end
 
-function DualityDebug.CreateConsoleAndDebugHud()
+function GameDebug.CreateConsoleAndDebugHud()
     -- Get default style
     local uiStyle = cache:GetResource("XMLFile", "UI/DefaultStyle.xml")
     if uiStyle == nil then
@@ -78,4 +78,4 @@ end
 
 
 
-return DualityDebug
+return GameDebug

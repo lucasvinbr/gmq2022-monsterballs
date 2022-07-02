@@ -1,9 +1,9 @@
----@class DualityEnemy : LuaScriptObject
+---@class Enemy : LuaScriptObject
 
----@type DualityEnemy
-DualityEnemy = ScriptObject()
+---@type Enemy
+Enemy = ScriptObject()
 
-DualityEnemy.__index = DualityEnemy
+Enemy.__index = Enemy
 
 ---@class EnemyData
 ---@field isNoClip boolean
@@ -20,7 +20,7 @@ local unflippedEnemyDatas = {
     { isNoClip = true, looksPath = "Urho2D/duality/enemies/abelhas.scml"}
 }
 
-function DualityEnemy:Start()
+function Enemy:Start()
     log:Write(LOG_DEBUG, "Enemy start!")
 
     self.node:SetScale2D(Vector2.ONE * 0.45)
@@ -46,7 +46,7 @@ function DualityEnemy:Start()
     coroutine.start(function ()
         while self.node ~= nil do
             coroutine.sleep(1.0)
-            if DistanceBetween(self.node.position2D, DualityPlayerNode.position2D) < self.chargeDistance then
+            if DistanceBetween(self.node.position2D, PlayerNode.position2D) < self.chargeDistance then
                 self.chargingAtPlayer = true
             else
                 if not self.alwaysChargesAtPlayer then
@@ -58,7 +58,7 @@ function DualityEnemy:Start()
 end
 
 --- sets up some of the enemy's data (like its looks and collider) based on whether it's in the flipped world or not
-function DualityEnemy:SetupFlipDependentData(isFlipped)
+function Enemy:SetupFlipDependentData(isFlipped)
     ---@type CollisionCircle2D
     self.collisionShape = self.node:CreateComponent("CollisionCircle2D")
     self.collisionShape:SetRadius(0.5)
@@ -98,7 +98,7 @@ function DualityEnemy:SetupFlipDependentData(isFlipped)
     self.node:AddTag(TAG_ENEMY)
 end
 
-function DualityEnemy:Update(timeStep)
+function Enemy:Update(timeStep)
 
     if CurGameState ~= GAMESTATE_PLAYING then
         self.animatedSprite:SetAnimationEnabled(false)
@@ -115,7 +115,7 @@ function DualityEnemy:Update(timeStep)
         moveSpeed = moveSpeed / 2
         self.moveTarget = self.node.position2D
     else
-        self.moveTarget = DualityPlayerNode.position2D
+        self.moveTarget = PlayerNode.position2D
     end
 
     ---@type Vector2

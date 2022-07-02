@@ -61,7 +61,7 @@ public:
 		context_->RegisterSubsystem(luaScript);
 
 		// If script loading is successful, proceed to main loop
-		if (luaScript->ExecuteFile("LuaScripts/mballs.lua"))
+		if (luaScript->ExecuteFile("LuaScripts/init.lua"))
 		{
 			luaScript->ExecuteFunction("Start");
 			return;

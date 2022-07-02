@@ -28,8 +28,14 @@ function StartMusic()
   ---@type Sound
   local flipMusicFile = cache:GetResource("Sound","Music/duality/gameplayv2.ogg")
 
-  musicFile.looped = true
-  flipMusicFile.looped = true
+  if musicFile then
+    musicFile.looped = true  
+  end
+  
+  if flipMusicFile then
+    flipMusicFile.looped = true  
+  end
+  
 
   if not musicSource:IsPlaying() then
     musicSource:Play(musicFile)

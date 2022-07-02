@@ -1,11 +1,11 @@
-DualityDebug = require "LuaScripts/duality_Debug"
+GameDebug = require "LuaScripts/Debug"
 local uiManager = require "LuaScripts/ui/UI_Manager"
-local dualityUiDefs = require "LuaScripts/ui/UI_Definitions"
-local mouseConfig = require "LuaScripts/duality_Mouse"
-require "LuaScripts/duality_World"
-require "LuaScripts/duality_Audio"
-require "LuaScripts/duality_Player"
-require "LuaScripts/duality_Enemy"
+local uiDefs = require "LuaScripts/ui/UI_Definitions"
+local mouseConfig = require "LuaScripts/Mouse"
+require "LuaScripts/World"
+require "LuaScripts/Audio"
+require "LuaScripts/Player"
+require "LuaScripts/Enemy"
 
 
 ---@type Scene
@@ -15,7 +15,7 @@ Scene_ = nil -- Scene
 CameraNode = nil -- Camera scene node
 
 ---@type Camera
-DualityCamera = nil
+GameCamera = nil
 
 function Start()
 
@@ -24,7 +24,7 @@ function Start()
   SetWindowTitleAndIcon()
 
   -- Execute debug stuff startup
-  DualityDebug.DebugSetup()
+  GameDebug.DebugSetup()
 
 -- Create the scene content
   CreateScene()
@@ -47,14 +47,14 @@ function SetupUI()
   local style = cache:GetResource("XMLFile", "UI/DefaultStyle.xml")
   ui.root.defaultStyle = style
   
-  uiManager.AddUiDefinitions(dualityUiDefs)
+  uiManager.AddUiDefinitions(uiDefs)
   uiManager.ShowUI("MainMenu")
 end
 
 function SetWindowTitleAndIcon()
     local icon = cache:GetResource("Image", "Urho2D/duality/gameIcon.png")
     graphics:SetWindowIcon(icon)
-    graphics.windowTitle = "Reviver"
+    graphics.windowTitle = "Monster Balls"
 end
 
 function CreateScene()
@@ -71,14 +71,14 @@ function CreateScene()
     CameraNode = Node()
     CameraNode:SetPosition(Vector3.BACK)
     ---@type Camera
-    DualityCamera = CameraNode:CreateComponent("Camera")
-    DualityCamera.orthographic = true
-    DualityCamera.orthoSize = graphics.height * PIXEL_SIZE
+    GameCamera = CameraNode:CreateComponent("Camera")
+    GameCamera.orthographic = true
+    GameCamera.orthoSize = graphics.height * PIXEL_SIZE
     CurCameraZoom = CurCameraZoom * Min(graphics.width / 1280, graphics.height / 800) -- Set zoom according to user's resolution to ensure full visibility (initial zoom (2) is set for full visibility at 1280x800 resolution)
-    DualityCamera:SetZoom(CurCameraZoom)
+    GameCamera:SetZoom(CurCameraZoom)
 
     -- Setup the viewport for displaying the scene
-    renderer:SetViewport(0, Viewport:new(Scene_, DualityCamera))
+    renderer:SetViewport(0, Viewport:new(Scene_, GameCamera))
     renderer.defaultZone.fogColor = Color(0.2, 0.2, 0.2) -- Set background color for the scene
 
     -- create level boundaries based on world bounds constants and scale
@@ -107,8 +107,6 @@ function CreateScene()
     local bottomBoundary = rightBoundary:Clone()
     bottomBoundary.position2D = Vector2(0, -WORLD_BOUNDS_UNSCALED.y - boundaryThickness)
     bottomBoundary:SetScale2D(Vector2(WORLD_BOUNDS_UNSCALED.x, boundaryThickness))
-
-    SetupCraveiContent()
 
 end
 
@@ -147,7 +145,7 @@ end
 
 function HandlePostRenderUpdate(eventType, eventData)
   -- If draw debug mode is enabled, draw physics debug geometry. Use depth test to make the result easier to interpret
-  if DualityDebug.drawDebug  then
+  if GameDebug.drawDebug  then
     Scene_:GetComponent("PhysicsWorld2D"):DrawDebugGeometry(true)
   end
 end

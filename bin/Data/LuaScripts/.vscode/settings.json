@@ -5,7 +5,7 @@
     "Lua.completion.workspaceWord": false,
     "Lua.runtime.version": "LuaJIT",
     "Lua.workspace.library": [
-        "E:\\urro\\urhoEmmyLuaLib"
+        "F:\\urro\\_tools\\urhoEmmyLuaLib"
     ],
     "Lua.hover.previewFields": 1000,
     "Lua.workspace.maxPreload": 10000,

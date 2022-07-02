@@ -1,4 +1,4 @@
-local DualityGlobalEvents = require("LuaScripts/duality_GlobalEvents")
+local GlobalEvents = require("LuaScripts/GlobalEvents")
 local uiManager = require("LuaScripts/ui/UI_Manager")
 
 ---@class UiEndgame : UiScreen
@@ -13,7 +13,7 @@ local leaveViaKeysEnabled = false
 ---@param instanceRoot UIElement
 Ui.Setup = function (instanceRoot)
 
-    DualityGlobalEvents:SubscribeToEvent("KeyUp", EndGameAnyKeyToContinue)
+    GlobalEvents:SubscribeToEvent("KeyUp", EndGameAnyKeyToContinue)
 
     local buttonPlay = instanceRoot:GetChild("ButtonPlay", true)
     SubscribeToEvent(buttonPlay, "Released", function ()

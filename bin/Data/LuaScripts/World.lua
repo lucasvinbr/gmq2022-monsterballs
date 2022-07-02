@@ -44,10 +44,10 @@ DemoFilename = "duality"
 DoneSettingUp = false
 
 ---@type Node
-DualityPlayerNode = nil
+PlayerNode = nil
 
----@type DualityPlayer
-DualityPlayerScript = nil
+---@type Player
+PlayerScript = nil
 
 ---@type Node
 local ankhNode = nil
@@ -128,12 +128,6 @@ local flippedObstacleDatas = {
 }
 
 
-function SetupCraveiContent()
-    ---@type Node
-    craveiContent = Scene_:InstantiateXML("Data/Objects/duality/cravei_content.xml", Vector3.ZERO, Quaternion.IDENTITY)
-    craveiContent:SetScale(0)
-end
-
 function CreateLevel()
 
     log:Write(LOG_DEBUG, TimesWon)
@@ -146,7 +140,7 @@ function CreateLevel()
     DynamicContentParent = Scene_:CreateChild("DynamicContent")
     -- Create player character
     CreateCharacter(Vector3(-2, 0, 0))
-    table.insert(unflippedElements, DualityPlayerNode)
+    table.insert(unflippedElements, PlayerNode)
 
     ---@type Node
     UnflippedScenarioContentParent = Scene_:CreateChild("ContentU")
@@ -180,7 +174,7 @@ function CreateLevel()
     CreateAnkh(GetRandomPositionInWorld(), true)
     table.insert(flippedElements, ankhNode)
   
-    CreateAltar(GetRandomPositionInWorld({DualityPlayerNode}), false)
+    CreateAltar(GetRandomPositionInWorld({PlayerNode}), false)
     table.insert(unflippedElements, altarNode)
     table.insert(flippedElements, altarNode)
   
@@ -205,17 +199,17 @@ function CreateLevel()
         CreateObstacle(GetRandomPositionInWorld(flippedElements), true)
     end
 
-    DualityPlayerScript:SetupBigHeadAnim()
+    PlayerScript:SetupBigHeadAnim()
 
 end
 
 
 function CreateCharacter(position)
-    DualityPlayerNode = DynamicContentParent:CreateChild("Player")
-    DualityPlayerNode.position = position
+    PlayerNode = DynamicContentParent:CreateChild("Player")
+    PlayerNode.position = position
 
-    ---@type DualityPlayer
-    DualityPlayerScript = DualityPlayerNode:CreateScriptObject("DualityPlayer") -- Create a ScriptObject to handle character behavior
+    ---@type Player
+    PlayerScript = PlayerNode:CreateScriptObject("DualityPlayer") -- Create a ScriptObject to handle character behavior
 
 end
 
@@ -499,7 +493,7 @@ function CreateEnemy(spawnPos, isInFlippedWorld)
     local node = parent:CreateChild("Enemy")
     node.position2D = spawnPos
 
-    ---@type DualityEnemy
+    ---@type Enemy
     local enemyScript = node:CreateScriptObject("DualityEnemy")
 
     enemyScript:SetupFlipDependentData(isInFlippedWorld)
@@ -577,13 +571,13 @@ end
 
 function FlipWorld(playFlipSound)
     WorldIsFlipped = not WorldIsFlipped
-    DualityPlayerScript:Flip(WorldIsFlipped)
+    PlayerScript:Flip(WorldIsFlipped)
     FlipMusic(WorldIsFlipped)
 
     if WorldIsFlipped then
-        DualityCamera:SetViewMask(VIEWMASK_FLIPPED)
+        GameCamera:SetViewMask(VIEWMASK_FLIPPED)
     else
-        DualityCamera:SetViewMask(VIEWMASK_UNFLIPPED)
+        GameCamera:SetViewMask(VIEWMASK_UNFLIPPED)
     end
 
     if playFlipSound then
@@ -606,8 +600,8 @@ function EndGame(victory)
     if CurGameState ~= GAMESTATE_ENDED then
         CurGameState = GAMESTATE_ENDED
 
-        DualityPlayerScript.canCountTime = false
-        DualityPlayerScript.canMove = false
+        PlayerScript.canCountTime = false
+        PlayerScript.canMove = false
 
         uiManager.HideUI("Game")
 
