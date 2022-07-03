@@ -1,4 +1,4 @@
-local DualityGlobalEvents = {}
+local GlobalEvents = {}
 
 local subscribedEvents = {}
 
@@ -10,7 +10,7 @@ end
 
 ---@param targetEventName string
 ---@param functionToCall function
-function DualityGlobalEvents:SubscribeToEvent(targetEventName, functionToCall)
+function GlobalEvents:SubscribeToEvent(targetEventName, functionToCall)
     if subscribedEvents[targetEventName] == nil then
         subscribedEvents[targetEventName] = {}
         SubscribeToEvent(targetEventName, function (eventType, eventData)
@@ -27,4 +27,4 @@ function DualityGlobalEvents:SubscribeToEvent(targetEventName, functionToCall)
 end
 
 
-return DualityGlobalEvents
+return GlobalEvents

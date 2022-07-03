@@ -1,4 +1,5 @@
 local uiManager = require("LuaScripts/ui/UI_Manager")
+local world = require "LuaScripts/World"
 
 ---@class UiLoading: UiScreen
 local Ui = {}
@@ -20,10 +21,11 @@ Ui.LoadingDone = function ()
     cachedInstanceRoot:SetVisible(false)
 
     log:Write(LOG_DEBUG, "loading done!")
-    DoneSettingUp = true
+    world.DoneSettingUp = true
     Scene_.updateEnabled = true
     -- StartMusic()
 
+    CurGameState = GAMESTATE_PLAYING
     uiManager.ShowUI("Game")
 end
 
@@ -32,7 +34,7 @@ end
 Ui.Show = function (instanceRoot, dataPassed)
     instanceRoot:SetVisible(true)
 
-    DoneSettingUp = false
+    world.DoneSettingUp = false
 
     SetupGameMatch()
 

@@ -1,0 +1,5 @@
+<material>
+    <technique name="Techniques/Diff.xml" />
+    <texture unit="diffuse" name="Textures\mballs\dilao/dilao_eyes_d.png" />
+    <parameter name="MatSpecColor" value="1.0 1.0 1.0 32.0" />
+</material>

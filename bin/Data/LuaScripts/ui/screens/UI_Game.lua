@@ -1,4 +1,5 @@
 local uiManager = require("LuaScripts/ui/UI_Manager")
+local world = require("LuaScripts/World")
 
 ---@class UiGame: UiScreen
 local Ui = {}
@@ -20,8 +21,6 @@ end
 ---@param dataPassed table
 Ui.Show = function (instanceRoot, dataPassed)
     instanceRoot:SetVisible(true)
-    PlayerScript.timeBar = timeBar
-    PlayerScript.canCountTime = true
 end
 
 return Ui

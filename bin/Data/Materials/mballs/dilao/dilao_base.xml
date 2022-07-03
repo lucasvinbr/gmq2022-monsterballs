@@ -1,0 +1,7 @@
+<material>
+    <technique name="Techniques/DiffNormalSpec.xml" />
+    <texture unit="diffuse" name="Textures\mballs\dilao/dilao_d_mixed.png" />
+    <parameter name="MatSpecColor" value="1.0 1.0 1.0 2.0" />
+    <texture unit="specular" name="Textures\mballs\dilao/dilao_rough.png" />
+    <texture unit="normal" name="Textures\mballs\dilao/dilao_n.png" />
+</material>

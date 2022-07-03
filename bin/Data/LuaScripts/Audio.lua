@@ -1,75 +1,50 @@
+local GameAudio = {}
+
 ---@type SoundSource
 local musicSource = nil
 
----@type SoundSource
-local flippedMusicSource = nil
-
 local mainAudioFrequency = 22050
 
-function SetupSound()
+--- creates elements for playing music and creates the main sound listener at the game camera
+function GameAudio.SetupSound()
 
   -- Create music sound sources
   musicSource = Scene_:CreateComponent("SoundSource")
-  flippedMusicSource = Scene_:CreateComponent("SoundSource")
   -- Set the sound type to music so that master volume control works correctly
   musicSource.soundType = SOUND_MUSIC
-  flippedMusicSource.soundType = SOUND_MUSIC
 
   -- add listener to camera
-  local listener = CameraNode:CreateComponent("SoundListener")
+  local listener = GameCameraNode:CreateComponent("SoundListener")
   audio:SetListener(listener)
 end
 
 
-function StartMusic()
+function GameAudio.StartMusic()
   ---@type Sound
   local musicFile = cache:GetResource("Sound","Music/duality/gameplayv1.ogg")
 
-  ---@type Sound
-  local flipMusicFile = cache:GetResource("Sound","Music/duality/gameplayv2.ogg")
-
   if musicFile then
-    musicFile.looped = true  
+    musicFile.looped = true
   end
-  
-  if flipMusicFile then
-    flipMusicFile.looped = true  
-  end
-  
 
   if not musicSource:IsPlaying() then
     musicSource:Play(musicFile)
   end
 
-  if not flippedMusicSource:IsPlaying() then
-    flippedMusicSource:Play(flipMusicFile)
-  end
-
   musicSource:SetGain(0.63)
-  flippedMusicSource:SetGain(0.63)
-
-  FlipMusic(WorldIsFlipped)
 end
 
-function FlipMusic(isInFlippedWorld)
-
-  if isInFlippedWorld then
-    musicSource:SetGain(0.0)
-    flippedMusicSource:SetGain(0.63)
-  else
-    musicSource:SetGain(0.63)
-    flippedMusicSource:SetGain(0.0)
-  end
-
-end
-
-function StopMusic()
+function GameAudio.StopMusic()
   -- MusicSource:Stop()
   musicSource:Stop()
-  flippedMusicSource:Stop()
 end
 
-function PlayOneShotSound(soundFilePath, gain, freqVariation)
+---@param soundFilePath string
+---@param gain number?
+---@param freqVariation number?
+---@param is3dSound boolean?
+---@param emittingNode Node | Scene?
+function GameAudio.PlayOneShotSound(soundFilePath, gain, freqVariation, is3dSound, emittingNode)
   -- Get the sound resource
   local sound = cache:GetResource("Sound", soundFilePath)
 
@@ -77,8 +52,20 @@ function PlayOneShotSound(soundFilePath, gain, freqVariation)
     -- Create a SoundSource component for playing the sound. The SoundSource component plays
     -- non-positional audio, so its 3D position in the scene does not matter. For positional sounds the
     -- SoundSource3D component would be used instead
-    ---@type SoundSource
-    local soundSource = Scene_:CreateComponent("SoundSource")
+
+    ---@type SoundSource | SoundSource3D
+    local soundSource = nil
+
+    if emittingNode == nil then
+      emittingNode = Scene_
+    end
+
+    if is3dSound then
+      soundSource = emittingNode:CreateComponent("SoundSource3D") --[[@as SoundSource3D]]
+    else
+      soundSource = emittingNode:CreateComponent("SoundSource") --[[@as SoundSource]]
+    end
+
     soundSource:SetSoundType(SOUND_EFFECT)
     soundSource:SetAutoRemoveMode(REMOVE_COMPONENT)
 
@@ -96,12 +83,15 @@ function PlayOneShotSound(soundFilePath, gain, freqVariation)
 end
 
 
-function HandleSoundVolume(eventType, eventData)
+function GameAudio.HandleSoundVolume(eventType, eventData)
   local newVolume = eventData["Value"]:GetFloat()
   audio:SetMasterGain(SOUND_EFFECT, newVolume)
 end
 
-function HandleMusicVolume(eventType, eventData)
+function GameAudio.HandleMusicVolume(eventType, eventData)
   local newVolume = eventData["Value"]:GetFloat()
   audio:SetMasterGain(SOUND_MUSIC, newVolume)
 end
+
+
+return GameAudio

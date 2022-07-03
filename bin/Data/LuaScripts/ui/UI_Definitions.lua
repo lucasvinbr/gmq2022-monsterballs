@@ -44,21 +44,16 @@ local definitions = {
 ---@field title string
 ---@field prompt string
 ---@field buttonInfos PopupButtonInfo[]
-local popupDisplayData = nil
 
 ---@class InputPopupDisplayData : PopupDisplayData
 ---@field inputFieldInitialValue string
-local inputPopupDisplayData = nil
 
 ---@class PopupButtonInfo
 ---@field buttonText string
 ---@field buttonAction function
 ---@field closePopupOnClick boolean
-local popupButtonInfo = nil
 
 ---@class EndGameScreenData
 ---@field hasWon boolean
-local endGameScreenData = nil
-
 
 return definitions

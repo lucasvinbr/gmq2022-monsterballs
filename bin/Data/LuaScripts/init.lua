@@ -2,17 +2,40 @@ GameDebug = require "LuaScripts/Debug"
 local uiManager = require "LuaScripts/ui/UI_Manager"
 local uiDefs = require "LuaScripts/ui/UI_Definitions"
 local mouseConfig = require "LuaScripts/Mouse"
-require "LuaScripts/World"
+local world = require "LuaScripts/World"
+local gameAudio = require "LuaScripts/Audio"
 require "LuaScripts/Audio"
 require "LuaScripts/Player"
 require "LuaScripts/Enemy"
+
+
+COLMASK_WORLD = 1
+COLMASK_WORLD_FLIPPED = 2
+COLMASK_PLAYER = 4
+COLMASK_PLAYER_FLIPPED = 8
+COLMASK_OBJS = 16
+COLMASK_OBJS_FLIPPED = 32
+
+TAG_PLAYER = "player"
+TAG_ENEMY = "enemy"
+TAG_WIN_OBJ = "winnerobj"
+
+GAMESTATE_ENDED = 1
+GAMESTATE_STARTING = 2
+GAMESTATE_PLAYING = 4
+GAMESTATE_ENDING = 8
+
+CurGameState = GAMESTATE_ENDED
+
+DemoFilename = "mballs"
+
 
 
 ---@type Scene
 Scene_ = nil -- Scene
 
 ---@type Node
-CameraNode = nil -- Camera scene node
+GameCameraNode = nil -- Camera scene node
 
 ---@type Camera
 GameCamera = nil
@@ -32,7 +55,7 @@ function Start()
 -- Hook up to relevant events
   SubscribeToEvents()
 
-  SetupSound()
+  gameAudio.SetupSound()
 
   SetupUI()
 
@@ -61,66 +84,26 @@ function CreateScene()
     ---@type Scene
     Scene_ = Scene()
 
-    -- Create the Octree, DebugRenderer and PhysicsWorld2D components to the scene
-    Scene_:CreateComponent("Octree")
-    Scene_:CreateComponent("DebugRenderer")
-    local physicsWorld = Scene_:CreateComponent("PhysicsWorld2D")
-    -- physicsWorld.gravity = Vector2.ZERO -- Neutralize gravity as the character will always be grounded
+    -- load base scene (already contains physics world, etc)
+    Scene_:LoadXML(fileSystem:GetProgramDir().."Data/Scenes/mballs/Scenes/game.xml")
 
     -- Create camera
-    CameraNode = Node()
-    CameraNode:SetPosition(Vector3.BACK)
-    ---@type Camera
-    GameCamera = CameraNode:CreateComponent("Camera")
-    GameCamera.orthographic = true
-    GameCamera.orthoSize = graphics.height * PIXEL_SIZE
-    CurCameraZoom = CurCameraZoom * Min(graphics.width / 1280, graphics.height / 800) -- Set zoom according to user's resolution to ensure full visibility (initial zoom (2) is set for full visibility at 1280x800 resolution)
-    GameCamera:SetZoom(CurCameraZoom)
+    GameCameraNode = Node()
+    GameCameraNode:SetPosition(Vector3(5.0, 5.0, 5.0))
+
+    GameCamera = GameCameraNode:CreateComponent("Camera")
 
     -- Setup the viewport for displaying the scene
     renderer:SetViewport(0, Viewport:new(Scene_, GameCamera))
     renderer.defaultZone.fogColor = Color(0.2, 0.2, 0.2) -- Set background color for the scene
 
-    -- create level boundaries based on world bounds constants and scale
-    local boundaryThickness = 10
-    local rightBoundary = Scene_:CreateChild("levelBounds")
-    ---@type RigidBody2D
-    local boundaryRigid = rightBoundary:CreateComponent("RigidBody2D")
-    boundaryRigid.bodyType = BT_STATIC
-
-    ---@type CollisionBox2D
-    local boundaryShape = rightBoundary:CreateComponent("CollisionBox2D")
-    boundaryShape:SetCategoryBits(COLMASK_WORLD)
-    boundaryShape:SetSize(2.0, 2.0)
-
-    rightBoundary.position2D = Vector2(WORLD_BOUNDS_UNSCALED.x + boundaryThickness, 0)
-    rightBoundary:SetScale2D(Vector2(boundaryThickness, WORLD_BOUNDS_UNSCALED.y))
-
-    local leftBoundary = rightBoundary:Clone()
-    leftBoundary.position2D = Vector2(-WORLD_BOUNDS_UNSCALED.x - boundaryThickness, 0)
-    leftBoundary:SetScale2D(Vector2(boundaryThickness, WORLD_BOUNDS_UNSCALED.y))
-
-    local topBoundary = rightBoundary:Clone()
-    topBoundary.position2D = Vector2(0, WORLD_BOUNDS_UNSCALED.y + boundaryThickness)
-    topBoundary:SetScale2D(Vector2(WORLD_BOUNDS_UNSCALED.x, boundaryThickness))
-
-    local bottomBoundary = rightBoundary:Clone()
-    bottomBoundary.position2D = Vector2(0, -WORLD_BOUNDS_UNSCALED.y - boundaryThickness)
-    bottomBoundary:SetScale2D(Vector2(WORLD_BOUNDS_UNSCALED.x, boundaryThickness))
-
 end
 
 function SetupGameMatch()
 
-  WorldIsFlipped = false
+  world.Cleanup()
 
-  Cleanup()
-
-  CreateLevel()
-
-  -- flip world twice to enable and disable all relevant stuff
-  FlipWorld()
-  FlipWorld(true)
+  world.CreateDynamicContent()
 
   -- Check when scene is rendered; we pause until the player presses "play"
   SubscribeToEvent("EndRendering", HandleSceneReady)
@@ -130,7 +113,7 @@ end
 
 function SetupViewport()
   -- Set up a viewport to the Renderer subsystem so that the 3D scene can be seen
-  local viewport = Viewport:new(Scene_, CameraNode:GetComponent("Camera"))
+  local viewport = Viewport:new(Scene_, GameCameraNode:GetComponent("Camera"))
   renderer:SetViewport(0, viewport)
 end
 
@@ -152,7 +135,7 @@ end
 
 function HandleSceneReady()
   UnsubscribeFromEvent("EndRendering")
-  if not DoneSettingUp then
+  if not world.DoneSettingUp then
     Scene_.updateEnabled = false -- Pause the scene if it's still being loaded
   end
 end

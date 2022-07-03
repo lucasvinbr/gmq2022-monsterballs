@@ -1,4 +1,5 @@
 local uiManager = require("LuaScripts/ui/UI_Manager")
+local gameAudio = require "LuaScripts/Audio"
 
 ---@class UiScreen
 local Ui = {}
@@ -44,7 +45,7 @@ end
 Ui.Show = function (instanceRoot, dataPassed)
     instanceRoot:SetVisible(true)
 
-    StartMusic()
+    gameAudio.StartMusic()
 end
 
 return Ui
