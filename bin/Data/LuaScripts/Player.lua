@@ -52,7 +52,6 @@ function Player:Update(timeStep)
 
     -- Move
     if not moveDir:Equals(Vector3.ZERO) and self.canMove then
-        log:Write(LOG_DEBUG, "use the force porra")
         self.body:ApplyTorque(moveDir * timeStep)
     end
     
@@ -65,6 +64,5 @@ function Player:HandleCollisionStart(eventType, eventData)
     ---@type Node
     local otherNode = eventData["OtherNode"]:GetPtr("Node")
 
-    log:Write(LOG_DEBUG, otherNode:GetName())
     gameAudio.PlayOneShotSound("Sounds/mballs/morte.ogg", 1.0, 200, true, self.node)
 end

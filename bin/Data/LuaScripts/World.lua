@@ -27,7 +27,6 @@ function world.CreateDynamicContent()
     GameCameraNode.worldRotation = watcherEyesNode.worldRotation
 
 
-
     -- local ballSpawnsParent = Scene_:GetChild("monsterSpawns")
     -- local randomBallSpawn = ballSpawnsParent:GetChild(RandomInt(1, ballSpawnsParent:GetNumChildren(false)))
 
