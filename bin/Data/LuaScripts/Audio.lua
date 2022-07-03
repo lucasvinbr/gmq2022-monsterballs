@@ -44,7 +44,7 @@ end
 ---@param freqVariation number?
 ---@param is3dSound boolean?
 ---@param emittingNode Node | Scene?
-function GameAudio.PlayOneShotSound(soundFilePath, gain, freqVariation, is3dSound, emittingNode)
+function GameAudio.PlayOneShotSoundWithFreqVariation(soundFilePath, gain, freqVariation, is3dSound, emittingNode)
   -- Get the sound resource
   local sound = cache:GetResource("Sound", soundFilePath)
 
@@ -82,6 +82,48 @@ function GameAudio.PlayOneShotSound(soundFilePath, gain, freqVariation, is3dSoun
   end
 end
 
+---@param soundFilePath string
+---@param gain number?
+---@param frequency number?
+---@param is3dSound boolean?
+---@param emittingNode Node | Scene?
+function GameAudio.PlayOneShotSoundWithFrequency(soundFilePath, gain, frequency, is3dSound, emittingNode)
+  -- Get the sound resource
+  local sound = cache:GetResource("Sound", soundFilePath)
+
+  if sound ~= nil then
+    -- Create a SoundSource component for playing the sound. The SoundSource component plays
+    -- non-positional audio, so its 3D position in the scene does not matter. For positional sounds the
+    -- SoundSource3D component would be used instead
+
+    ---@type SoundSource | SoundSource3D
+    local soundSource = nil
+
+    if emittingNode == nil then
+      emittingNode = Scene_
+    end
+
+    if is3dSound then
+      soundSource = emittingNode:CreateComponent("SoundSource3D") --[[@as SoundSource3D]]
+    else
+      soundSource = emittingNode:CreateComponent("SoundSource") --[[@as SoundSource]]
+    end
+
+    soundSource:SetSoundType(SOUND_EFFECT)
+    soundSource:SetAutoRemoveMode(REMOVE_COMPONENT)
+
+    if gain == nil then
+      gain = 1.0
+    end
+
+    if frequency == nil then
+      frequency = mainAudioFrequency
+    end
+
+    soundSource:Play(sound, frequency, gain)
+
+  end
+end
 
 function GameAudio.HandleSoundVolume(eventType, eventData)
   local newVolume = eventData["Value"]:GetFloat()

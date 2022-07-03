@@ -4,8 +4,23 @@ local gameAudio = require "LuaScripts/Audio"
 
 ---@class Player : LuaScriptObject
 ---@field body RigidBody
+---@field timeBar ProgressBar
+
+local hitSounds = {
+    "Sounds/mballs/hit1.ogg",
+    "Sounds/mballs/hit2.ogg",
+    "Sounds/mballs/hit3.ogg",
+    "Sounds/mballs/hit4.ogg",
+    "Sounds/mballs/hit5.ogg",
+}
+
+local hitHeavySounds = {
+    "Sounds/mballs/hit_heavy.ogg",
+}
 
 local MOVE_SPEED = 500.0
+
+local INTERVAL_HOWL = 10.0
 
 -- Character script object class
 ---@type Player
@@ -17,7 +32,8 @@ function Player:Start()
     self.canCountTime = false
     self.canMove = true
 
-    ---@type ProgressBar
+    self.timeSinceLastHowl = INTERVAL_HOWL
+
     self.timeBar = nil
 
     self.body = self.node:GetComponent("RigidBody", false)
@@ -25,10 +41,15 @@ function Player:Start()
     self.body:Activate()
 
     self:SubscribeToEvent(self.node, "NodeCollisionStart", "Player:HandleCollisionStart")
-
 end
 
 function Player:Update(timeStep)
+
+    self.timeSinceLastHowl = self.timeSinceLastHowl + timeStep
+
+    if self.timeBar then
+        self.timeBar:SetValue(1.0 - (self.timeSinceLastHowl / INTERVAL_HOWL))
+    end
 
     -- Set direction
     ---@type Vector3
@@ -50,6 +71,14 @@ function Player:Update(timeStep)
         moveDir = moveDir + Vector3.BACK * speedY
     end
 
+    if self.canMove and self.timeSinceLastHowl > INTERVAL_HOWL and input:GetKeyDown(KEY_SPACE) then
+        -- do the howl
+        self.timeSinceLastHowl = 0.0
+        gameAudio.PlayOneShotSoundWithFreqVariation("Sounds/mballs/hit_heavy.ogg", 1.5, 2000, true, self.node)
+        gameAudio.PlayOneShotSoundWithFreqVariation("Sounds/mballs/basicTurbo.ogg", 1.5, 2000, true, self.node)
+        world.SpawnOneShotParticleEffect(self.node.worldPosition,"Particle/mballs/howl.xml")
+    end
+
     -- Move
     if not moveDir:Equals(Vector3.ZERO) and self.canMove then
         self.body:ApplyTorque(moveDir * timeStep)
@@ -61,8 +90,11 @@ function Player:HandleCollisionStart(eventType, eventData)
 
     if CurGameState ~= GAMESTATE_PLAYING then return end
 
-    ---@type Node
-    local otherNode = eventData["OtherNode"]:GetPtr("Node")
+    local velocity = self.body.linearVelocity:Length()
 
-    gameAudio.PlayOneShotSound("Sounds/mballs/morte.ogg", 1.0, 200, true, self.node)
+    gameAudio.PlayOneShotSoundWithFrequency(hitSounds[RandomInt(#hitSounds) + 1],
+     1.0,
+      22050 + Lerp(0, 10000, velocity / 20.0),
+       true,
+        self.node)
 end

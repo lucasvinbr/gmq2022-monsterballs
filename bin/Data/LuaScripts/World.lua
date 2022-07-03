@@ -20,24 +20,22 @@ function world.CreateDynamicContent()
     CurGameState = GAMESTATE_STARTING
 
     world.DynamicContentParent = Scene_:CreateChild("DynamicContent")
+
+    -- set up watcher
+    local watcherNode = Scene_:GetChild("cameraSpawn"):GetChild("watcher")
+    watcherNode:CreateScriptObject("Watcher")
+
+    local ballSpawnsParent = Scene_:GetChild("monsterSpawns")
+    local randomBallSpawn = ballSpawnsParent:GetChild(RandomInt(1, ballSpawnsParent:GetNumChildren(false)))
     -- Create player character
-    local watcherEyesNode = Scene_:GetChild("cameraSpawn"):GetChild("watcher"):GetChild("watcher_eyesPoint")
-    --GameCameraNode:SetParent(watcherEyesNode) this seems to crash
-    GameCameraNode.worldPosition = watcherEyesNode.worldPosition
-    GameCameraNode.worldRotation = watcherEyesNode.worldRotation
-
-
-    -- local ballSpawnsParent = Scene_:GetChild("monsterSpawns")
-    -- local randomBallSpawn = ballSpawnsParent:GetChild(RandomInt(1, ballSpawnsParent:GetNumChildren(false)))
-
-    world.CreateCharacter(GameCameraNode.worldPosition + Vector3.RIGHT * 8.0)
+    world.CreateCharacter(randomBallSpawn.worldPosition)
 end
 
 
 function world.CreateCharacter(position)
     -- local playerXml = cache:GetResource("XMLFile", "Data/Objects/mballs/mball.xml")
     -- world.PlayerNode = world.DynamicContentParent:CreateChild("PlayerBall")
-    world.PlayerNode = Scene_:InstantiateXML("Data/Objects/mballs/mball.xml", position, Quaternion.IDENTITY)
+    world.PlayerNode = Scene_:InstantiateXML(fileSystem:GetProgramDir().."Data/Objects/mballs/mball.xml", position, Quaternion.IDENTITY)
     world.PlayerNode:SetParent(world.DynamicContentParent)
 
     ---@type Player
@@ -80,7 +78,7 @@ function world.EndGame(victory)
         if victory then
             TimesWon = TimesWon + 1
         else
-            gameAudio.PlayOneShotSound("Music/duality/gameplaytransition.ogg", 0.65, 0)
+            gameAudio.PlayOneShotSoundWithFreqVariation("Music/duality/gameplaytransition.ogg", 0.65, 0)
         end
 
         uiManager.ShowUI("Endgame", gameEndData)
@@ -98,19 +96,21 @@ function world.Cleanup()
     end
 end
 
-function world.SpawnEffect(node)
+function world.SpawnOneShotParticleEffect(worldPosition, effectPath)
     local particleNode = Scene_:CreateChild("Emitter")
-    particleNode:SetPosition2D(node.position)
-    particleNode:SetScale(node.scale.x * 3)
-    ---@type ParticleEmitter2D
-    local particleEmitter = particleNode:CreateComponent("ParticleEmitter2D")
-    particleEmitter:SetLayer(2)
-    particleEmitter.effect = cache:GetResource("ParticleEffect2D", "Urho2D/duality/folhas.pex")
+    particleNode:SetPosition(worldPosition)
+    ---@type ParticleEmitter
+    local particleEmitter = particleNode:CreateComponent("ParticleEmitter")
+    particleEmitter:SetAutoRemoveMode(REMOVE_NODE)
+    particleEmitter.effect = cache:GetResource("ParticleEffect", effectPath)
+    
     
     coroutine.start(function()
-        coroutine.sleep(1.5)
-        particleNode:Remove()
+        coroutine.sleep(particleEmitter.effect:GetMinTimeToLive())
+        particleEmitter:SetEmitting(false)
     end)
+
+    return particleEmitter
 end
 
 
@@ -124,48 +124,6 @@ function world.DistanceBetween(from, to)
 
     return subtractedVec:Length()
 
-end
-
----@param repulsors table
----@param extraPaddingFromBounds number
----@return Vector2
-function world.GetRandomPositionInWorld(repulsors, extraPaddingFromBounds)
-
-    if extraPaddingFromBounds == nil then
-        extraPaddingFromBounds = 0.0
-    end
-
-    local attempts = 0
-    local padding = 0.1
-    local pickedPos = Vector2(
-        Random((-WORLD_BOUNDS_UNSCALED.x) + padding + extraPaddingFromBounds, (WORLD_BOUNDS_UNSCALED.x) - padding - extraPaddingFromBounds),
-        Random((-WORLD_BOUNDS_UNSCALED.y) + padding + extraPaddingFromBounds, (WORLD_BOUNDS_UNSCALED.y) - padding - extraPaddingFromBounds)
-    )
-    local positionIsValid = true
-
-    while attempts < 10 do
-        
-        positionIsValid = true
-
-        if repulsors ~= nil then
-            for _, repulsor in pairs(repulsors) do
-                if world.DistanceBetween(repulsor.position2D, pickedPos) < 1.25 then
-                    positionIsValid = false
-                    break
-                end
-            end
-        end
-
-        if positionIsValid then
-            break
-        else
-            pickedPos = Vector2(Random(-WORLD_BOUNDS_UNSCALED.x, WORLD_BOUNDS_UNSCALED.x), Random(-WORLD_BOUNDS_UNSCALED.y, WORLD_BOUNDS_UNSCALED.y))
-            attempts = attempts + 1
-        end
-
-    end
-
-    return pickedPos
 end
 
 function world.SaveScene(initial)

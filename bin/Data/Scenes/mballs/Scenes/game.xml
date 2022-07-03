@@ -5,15 +5,31 @@
 	<attribute name="Smoothing Constant" value="50" />
 	<attribute name="Snap Threshold" value="5" />
 	<attribute name="Elapsed Time" value="2.83374" />
-	<attribute name="Next Replicated Node ID" value="332" />
-	<attribute name="Next Replicated Component ID" value="985" />
-	<attribute name="Next Local Node ID" value="16777723" />
-	<attribute name="Next Local Component ID" value="16777384" />
+	<attribute name="Next Replicated Node ID" value="333" />
+	<attribute name="Next Replicated Component ID" value="990" />
+	<attribute name="Next Local Node ID" value="16777731" />
+	<attribute name="Next Local Component ID" value="16777408" />
 	<attribute name="Variables" />
 	<attribute name="Variable Names" value="" />
 	<component type="Octree" id="1" />
 	<component type="DebugRenderer" id="2" />
 	<component type="PhysicsWorld" id="5" />
+	<node id="332">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="roof" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-33.2827 32 29.2601" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="200 1 200" />
+		<attribute name="Variables" />
+		<component type="CollisionShape" id="988">
+			<attribute name="Size" value="1 50 1" />
+		</component>
+		<component type="RigidBody" id="989">
+			<attribute name="Physics Position" value="-33.2827 32 29.2601" />
+			<attribute name="Is Kinematic" value="true" />
+		</component>
+	</node>
 	<node id="2">
 		<attribute name="Is Enabled" value="true" />
 		<attribute name="Name" value="scenario" />
@@ -7439,6 +7455,60 @@
 			<attribute name="Name" value="" />
 			<attribute name="Tags" />
 			<attribute name="Position" value="-111.358 1.455 26.0436" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777725">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-76.0704 1.455 15.3439" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777726">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-34.7507 1.455 11.3732" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777727">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-0.109641 1.455 0.891773" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777728">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-10.2389 1.455 88.1361" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777729">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-34.5678 1.455 88.3227" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+		</node>
+		<node id="16777730">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Tags" />
+			<attribute name="Position" value="-87.3991 1.455 87.8619" />
 			<attribute name="Rotation" value="1 0 0 0" />
 			<attribute name="Scale" value="1 1 1" />
 			<attribute name="Variables" />

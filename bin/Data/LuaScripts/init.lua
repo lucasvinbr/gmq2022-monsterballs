@@ -4,9 +4,8 @@ local uiDefs = require "LuaScripts/ui/UI_Definitions"
 local mouseConfig = require "LuaScripts/Mouse"
 local world = require "LuaScripts/World"
 local gameAudio = require "LuaScripts/Audio"
-require "LuaScripts/Audio"
 require "LuaScripts/Player"
-require "LuaScripts/Enemy"
+require "LuaScripts/Watcher"
 
 
 COLMASK_WORLD = 1

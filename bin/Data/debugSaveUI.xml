@@ -346,7 +346,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:18 2022] DEBUG: Loading resource Techniques/DiffNormalSpec.xml" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:28 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_rough.png" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -358,7 +358,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:18 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_d_mixed.png" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:28 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_n.png" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -370,7 +370,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:19 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_rough.png" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:28 2022] DEBUG: Loading resource Materials/mballs/dilao/dilao_eyes.xml" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -382,7 +382,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:19 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_n.png" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:28 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_eyes_d.png" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -394,7 +394,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Loading resource Materials/mballs/dilao/dilao_eyes.xml" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: loading done!" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -406,7 +406,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Loading resource Techniques/Diff.xml" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Loading resource UI/mballs/screen_game.xml" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -418,7 +418,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Loading resource Textures/mballs/dilao/dilao_eyes_d.png" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Loading UI layout UI/mballs/screen_game.xml" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -430,7 +430,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: loading done!" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Compiled vertex shader LitSolid(DIRLIGHT INSTANCED PERPIXEL SHADOW)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -442,7 +442,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Loading resource UI/mballs/screen_game.xml" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Compiled pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT PCF_SHADOW PERPIXEL SHADOW SPECULAR)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -454,7 +454,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Loading UI layout UI/mballs/screen_game.xml" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Linked vertex shader LitSolid(DIRLIGHT INSTANCED PERPIXEL SHADOW) and pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT PCF_SHADOW PERPIXEL SHADOW SPECULAR)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -466,7 +466,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Compiled vertex shader LitSolid(DIRLIGHT NORMALMAP PERPIXEL SHADOW)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Compiled vertex shader LitSolid(DIRLIGHT NORMALMAP PERPIXEL SHADOW)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -478,7 +478,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Compiled pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT NORMALMAP PCF_SHADOW PERPIXEL SHADOW SPECMAP SPECULAR)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Compiled pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT NORMALMAP PCF_SHADOW PERPIXEL SHADOW SPECMAP SPECULAR)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -490,7 +490,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Linked vertex shader LitSolid(DIRLIGHT NORMALMAP PERPIXEL SHADOW) and pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT NORMALMAP PCF_SHADOW PERPIXEL SHADOW SPECMAP SPECULAR)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Linked vertex shader LitSolid(DIRLIGHT NORMALMAP PERPIXEL SHADOW) and pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT NORMALMAP PCF_SHADOW PERPIXEL SHADOW SPECMAP SPECULAR)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -502,7 +502,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Compiled vertex shader LitSolid(DIRLIGHT PERPIXEL SHADOW)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Compiled vertex shader LitSolid(DIRLIGHT PERPIXEL SHADOW)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -514,7 +514,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Compiled pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT PCF_SHADOW PERPIXEL SHADOW SPECULAR)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Linked vertex shader LitSolid(DIRLIGHT PERPIXEL SHADOW) and pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT PCF_SHADOW PERPIXEL SHADOW SPECULAR)" />
 					</element>
 					<element type="Text" style="ConsoleDebugText">
 						<attribute name="Pivot" value="0 0" />
@@ -526,7 +526,7 @@
 						<attribute name="Is Enabled" value="true" />
 						<attribute name="Selection Color" value="0.23 0.3 0.27 1" />
 						<attribute name="Hover Color" value="0.3 0.4 0.32 1" />
-						<attribute name="Text" value="[Sun Jul  3 00:08:20 2022] DEBUG: Linked vertex shader LitSolid(DIRLIGHT PERPIXEL SHADOW) and pixel shader LitSolid(AMBIENT DIFFMAP DIRLIGHT PCF_SHADOW PERPIXEL SHADOW SPECULAR)" />
+						<attribute name="Text" value="[Sun Jul  3 15:33:29 2022] DEBUG: Loading resource Sounds/mballs/morte.ogg" />
 					</element>
 				</element>
 			</element>
