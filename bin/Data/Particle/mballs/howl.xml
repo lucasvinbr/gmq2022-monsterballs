@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <particleeffect>
-	<material name="Materials/Particle.xml" />
+	<material name="Materials/mballs/howlParticle.xml" />
 	<numparticles value="200" />
 	<updateinvisible enable="false" />
-	<relative enable="true" />
-	<scaled enable="true" />
+	<relative enable="false" />
+	<scaled enable="false" />
 	<sorted enable="false" />
 	<fixedscreensize enable="false" />
 	<animlodbias value="0" />
@@ -16,9 +16,9 @@
 	<activetime value="0" />
 	<inactivetime value="0" />
 	<emissionrate min="2000" max="2000" />
-	<particlesize min="0.1 1" max="0.2 2" />
-	<timetolive min="6" max="6" />
-	<velocity min="8" max="10" />
+	<particlesize min="0.1 4" max="0.2 6" />
+	<timetolive min="8" max="8" />
+	<velocity min="18" max="24" />
 	<rotation min="0" max="0" />
 	<rotationspeed min="0" max="0" />
 	<sizedelta add="1" mul="0.01" />

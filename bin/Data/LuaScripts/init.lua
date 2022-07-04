@@ -40,8 +40,7 @@ GameCameraNode = nil -- Camera scene node
 GameCamera = nil
 
 function Start()
-
-  SetRandomSeed(os.time())
+  SetRandomSeed(os.time() % 1000)
   -- Set custom window Title & Icon
   SetWindowTitleAndIcon()
 

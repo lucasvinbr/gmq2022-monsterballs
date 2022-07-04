@@ -5,10 +5,10 @@
 	<attribute name="Smoothing Constant" value="50" />
 	<attribute name="Snap Threshold" value="5" />
 	<attribute name="Elapsed Time" value="2.83374" />
-	<attribute name="Next Replicated Node ID" value="333" />
-	<attribute name="Next Replicated Component ID" value="990" />
-	<attribute name="Next Local Node ID" value="16777731" />
-	<attribute name="Next Local Component ID" value="16777408" />
+	<attribute name="Next Replicated Node ID" value="335" />
+	<attribute name="Next Replicated Component ID" value="991" />
+	<attribute name="Next Local Node ID" value="16777841" />
+	<attribute name="Next Local Component ID" value="16777424" />
 	<attribute name="Variables" />
 	<attribute name="Variable Names" value="" />
 	<component type="Octree" id="1" />
@@ -7400,38 +7400,10 @@
 		<attribute name="Is Enabled" value="true" />
 		<attribute name="Name" value="cameraSpawn" />
 		<attribute name="Tags" />
-		<attribute name="Position" value="-62.1287 1.455 50.1897" />
+		<attribute name="Position" value="-39.379 1.455 50.1897" />
 		<attribute name="Rotation" value="1 0 0 0" />
 		<attribute name="Scale" value="1 1 1" />
 		<attribute name="Variables" />
-		<node id="16777499">
-			<attribute name="Is Enabled" value="true" />
-			<attribute name="Name" value="watcher" />
-			<attribute name="Tags" />
-			<attribute name="Position" value="0 0.16306 0" />
-			<attribute name="Rotation" value="0.693416 0 0.720521 0" />
-			<attribute name="Scale" value="1 1 1" />
-			<attribute name="Variables" />
-			<component type="CollisionShape" id="16777308">
-				<attribute name="Size" value="2 2 2" />
-				<attribute name="Offset Position" value="0 1 0" />
-			</component>
-			<component type="RigidBody" id="16777309">
-				<attribute name="Physics Rotation" value="0.693424 0 0.720529 0" />
-				<attribute name="Physics Position" value="-62.1287 1.61806 50.1897" />
-				<attribute name="Is Kinematic" value="true" />
-				<attribute name="Is Trigger" value="true" />
-			</component>
-			<node id="16777715">
-				<attribute name="Is Enabled" value="true" />
-				<attribute name="Name" value="watcher_eyesPoint" />
-				<attribute name="Tags" />
-				<attribute name="Position" value="0 1.8 0" />
-				<attribute name="Rotation" value="1 0 0 0" />
-				<attribute name="Scale" value="1 1 1" />
-				<attribute name="Variables" />
-			</node>
-		</node>
 	</node>
 	<node id="16777336">
 		<attribute name="Is Enabled" value="true" />

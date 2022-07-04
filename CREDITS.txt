@@ -12,11 +12,5 @@ monsters:
 dilophosaur by lucasvinbr 
 https://sketchfab.com/3d-models/dilophosaur-f6f7187ec44543bb8b971cd58b775643
 
-Forest monster by CDmir
-(CC0) https://opengameart.org/content/forest-monster
-
-75 CC0 breaking / falling / hit sfx by rubberduck
-(CC0) https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx
-
 5 Hit Sounds + Dying by TinyWorlds
 (CC0) https://opengameart.org/content/5-hit-sounds-dying

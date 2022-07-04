@@ -21,14 +21,14 @@ function world.CreateDynamicContent()
 
     world.DynamicContentParent = Scene_:CreateChild("DynamicContent")
 
-    -- set up watcher
-    local watcherNode = Scene_:GetChild("cameraSpawn"):GetChild("watcher")
-    watcherNode:CreateScriptObject("Watcher")
-
     local ballSpawnsParent = Scene_:GetChild("monsterSpawns")
-    local randomBallSpawn = ballSpawnsParent:GetChild(RandomInt(1, ballSpawnsParent:GetNumChildren(false)))
+    local randomBallSpawn = ballSpawnsParent:GetChild(RandomInt(0, ballSpawnsParent:GetNumChildren(true)))
     -- Create player character
     world.CreateCharacter(randomBallSpawn.worldPosition)
+
+    -- set up watcher
+    local watcherSpawnNode = Scene_:GetChild("cameraSpawn")
+    world.CreateWatcher(watcherSpawnNode.worldPosition)
 end
 
 
@@ -41,6 +41,13 @@ function world.CreateCharacter(position)
     ---@type Player
     world.PlayerScript = world.PlayerNode:CreateScriptObject("Player") -- Create a ScriptObject to handle character behavior
 
+end
+
+function world.CreateWatcher(position)
+    local watcherNode = Scene_:InstantiateXML(fileSystem:GetProgramDir().."Data/Objects/mballs/watcher.xml", position, Quaternion.IDENTITY)
+    watcherNode:SetParent(world.DynamicContentParent)
+
+    watcherNode:CreateScriptObject("Watcher")
 end
 
 
@@ -86,6 +93,11 @@ function world.EndGame(victory)
     end
 end
 
+function world.FreezeAllPlayers()
+    -- TODO make this work in multiplayer
+    world.PlayerScript.body:SetKinematic(true)
+    world.PlayerScript.canMove = false
+end
 
 function world.Cleanup()
     if world.DynamicContentParent ~= nil then
@@ -103,8 +115,7 @@ function world.SpawnOneShotParticleEffect(worldPosition, effectPath)
     local particleEmitter = particleNode:CreateComponent("ParticleEmitter")
     particleEmitter:SetAutoRemoveMode(REMOVE_NODE)
     particleEmitter.effect = cache:GetResource("ParticleEffect", effectPath)
-    
-    
+    particleEmitter.effect.updateInvisible = true
     coroutine.start(function()
         coroutine.sleep(particleEmitter.effect:GetMinTimeToLive())
         particleEmitter:SetEmitting(false)

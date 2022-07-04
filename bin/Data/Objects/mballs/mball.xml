@@ -3,7 +3,7 @@
 	<attribute name="Is Enabled" value="true" />
 	<attribute name="Name" value="mball" />
 	<attribute name="Tags" />
-	<attribute name="Position" value="-52.2574 1.57501 48.6853" />
+	<attribute name="Position" value="0 0 0" />
 	<attribute name="Rotation" value="1 0 0 0" />
 	<attribute name="Scale" value="1 1 1" />
 	<attribute name="Variables" />
@@ -17,7 +17,7 @@
 		<attribute name="Offset Position" value="0.18 1.5 0" />
 	</component>
 	<component type="RigidBody" id="16777371">
-		<attribute name="Physics Position" value="-52.2574 1.57501 48.6853" />
+		<attribute name="Physics Position" value="0 0 0" />
 		<attribute name="Mass" value="1" />
 		<attribute name="Friction" value="2" />
 		<attribute name="Rolling Friction" value="1" />

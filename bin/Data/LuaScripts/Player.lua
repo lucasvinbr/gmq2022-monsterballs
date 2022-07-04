@@ -20,7 +20,7 @@ local hitHeavySounds = {
 
 local MOVE_SPEED = 500.0
 
-local INTERVAL_HOWL = 10.0
+local INTERVAL_HOWL = 4.0
 
 -- Character script object class
 ---@type Player
@@ -41,6 +41,8 @@ function Player:Start()
     self.body:Activate()
 
     self:SubscribeToEvent(self.node, "NodeCollisionStart", "Player:HandleCollisionStart")
+
+    log:Write(LOG_DEBUG, self.node.worldPosition:ToString())
 end
 
 function Player:Update(timeStep)
@@ -94,7 +96,7 @@ function Player:HandleCollisionStart(eventType, eventData)
 
     gameAudio.PlayOneShotSoundWithFrequency(hitSounds[RandomInt(#hitSounds) + 1],
      1.0,
-      22050 + Lerp(0, 10000, velocity / 20.0),
+      20050 + Lerp(0, 20000, velocity / 20.0),
        true,
         self.node)
 end
