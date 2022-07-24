@@ -33,9 +33,9 @@ end
 
 
 function world.CreateCharacter(position)
-    -- local playerXml = cache:GetResource("XMLFile", "Data/Objects/mballs/mball.xml")
-    -- world.PlayerNode = world.DynamicContentParent:CreateChild("PlayerBall")
-    world.PlayerNode = Scene_:InstantiateXML(fileSystem:GetProgramDir().."Data/Objects/mballs/mball.xml", position, Quaternion.IDENTITY)
+    local playerXml = cache:GetResource("XMLFile", "Objects/mballs/mball.xml") --[[@as XMLFile]]
+
+    world.PlayerNode = Scene_:InstantiateXML(playerXml:GetRoot(), position, Quaternion.IDENTITY)
     world.PlayerNode:SetParent(world.DynamicContentParent)
 
     ---@type Player
@@ -44,7 +44,8 @@ function world.CreateCharacter(position)
 end
 
 function world.CreateWatcher(position)
-    local watcherNode = Scene_:InstantiateXML(fileSystem:GetProgramDir().."Data/Objects/mballs/watcher.xml", position, Quaternion.IDENTITY)
+    local watcherXml = cache:GetResource("XMLFile", "Objects/mballs/watcher.xml") --[[@as XMLFile]]
+    local watcherNode = Scene_:InstantiateXML(watcherXml:GetRoot(), position, Quaternion.IDENTITY)
     watcherNode:SetParent(world.DynamicContentParent)
 
     watcherNode:CreateScriptObject("Watcher")

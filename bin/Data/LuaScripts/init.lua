@@ -82,8 +82,10 @@ function CreateScene()
     ---@type Scene
     Scene_ = Scene()
 
+    
     -- load base scene (already contains physics world, etc)
-    Scene_:LoadXML(fileSystem:GetProgramDir().."Data/Scenes/mballs/Scenes/game.xml")
+    local sceneXml = cache:GetResource("XMLFile", "Scenes/mballs/Scenes/game.xml") --[[@as XMLFile]]
+    Scene_:LoadXML(sceneXml:GetRoot())
 
     -- Create camera
     GameCameraNode = Node()
