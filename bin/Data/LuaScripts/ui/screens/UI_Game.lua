@@ -1,5 +1,6 @@
 local uiManager = require("LuaScripts/ui/UI_Manager")
 local world = require("LuaScripts/World")
+local mouseConfig = require "LuaScripts/Mouse"
 
 ---@class UiGame: UiScreen
 local Ui = {}
@@ -22,6 +23,9 @@ end
 Ui.Show = function (instanceRoot, dataPassed)
     instanceRoot:SetVisible(true)
     world.PlayerScript.timeBar = timeBar
+
+    -- lock mouse
+    mouseConfig.SetMouseMode(MM_ABSOLUTE)
 end
 
 return Ui
